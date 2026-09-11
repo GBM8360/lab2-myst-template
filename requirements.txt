@@ -10,6 +10,10 @@ numpy
 plotly
 matplotlib
 
+# Renders plotly figures to static images, so interactive figures also appear
+# (as a snapshot) in the PDF export
+kaleido
+
 # Add whatever your own content needs, e.g.:
 # scipy
 # nibabel

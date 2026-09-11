@@ -94,10 +94,10 @@ jobs:
   # the site publishes whether or not the PDF succeeds; `continue-on-error` means a
   # broken PDF shows as a warning rather than failing the whole run.
   #
-  # NOTE: interactive figures cannot appear in a PDF. A Plotly slider is
-  # JavaScript; print has no equivalent. MyST warns "Figure with no non-caption
-  # content" and leaves the caption. If a figure matters on paper, add a static
-  # version alongside the interactive one.
+  # Interactive figures reach the PDF as static snapshots: the notebooks set
+  # `pio.renderers.default = "plotly_mimetype+png"`, so each figure emits both an
+  # interactive and a PNG representation and the renderer picks per medium.
+  # That needs kaleido, which is in requirements.txt.
   # ---------------------------------------------------------------------------
   pdf:
     runs-on: ubuntu-latest

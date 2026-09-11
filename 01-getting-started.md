@@ -126,9 +126,19 @@ the PDF.
 (`conda install -c conda-forge typst`, or see [typst.app](https://typst.app)). You do not
 need it for `myst start` or for the website.
 
-:::{note} Interactive figures don't survive a PDF
-A Plotly slider is JavaScript, and paper has no equivalent. MyST warns
-`Figure with no non-caption content` and keeps the caption. If a figure has to work in
-print, put a static version next to the interactive one — export one representative
-frame with matplotlib and show whichever suits the format.
+:::{note} How interactive figures reach the PDF
+A Plotly slider is JavaScript, so print can't run it. The template handles this by
+having each figure emit **two representations at once**:
+
+```python
+pio.renderers.default = "plotly_mimetype+png"
+```
+
+The website uses the interactive one; the PDF uses a static PNG snapshot. The snapshot
+shows whichever frame is visible by default, so pick that default to be the frame worth
+printing.
+
+Without the `+png` half, MyST warns `Figure with no non-caption content` and the PDF
+gets a caption with nothing above it. This needs `kaleido` installed — it's in
+`requirements.txt`.
 :::

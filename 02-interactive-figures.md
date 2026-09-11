@@ -81,6 +81,11 @@ Two practical notes:
 (`np.round(z, 3)`, or casting an image to `uint8`) roughly halves the page size and
 costs nothing visually.
 
+**Emit a static fallback.** Set `pio.renderers.default = "plotly_mimetype+png"` once in
+the notebook and every figure ships both an interactive version and a PNG. The website
+uses the first, the PDF the second. The snapshot captures whichever frame is visible by
+default — so make that default the frame you would have chosen if you only got one.
+
 **Window your colours consistently.** If each frame auto-scales its own brightness, the
 artifact you're trying to show gets normalised away as the reader drags. Fix the scale
 once, from a reference frame, and apply it to all of them.

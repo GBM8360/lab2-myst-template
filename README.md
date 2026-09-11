@@ -61,7 +61,9 @@ A separate `pdf` job builds a PDF on every push. Actions tab > a run > **Artifac
 `book-pdf`. It installs LaTeX so it is slower than the site build, and it is
 non-blocking: a PDF failure never stops your website deploying.
 
-Interactive figures cannot render in a PDF — see `01-getting-started.md`.
+Interactive figures appear in the PDF as static snapshots — each one emits both an
+interactive and a PNG representation, and the renderer picks per medium. See
+`01-getting-started.md`.
 
 ## Things to change first
 
