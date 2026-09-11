@@ -119,8 +119,10 @@ are worth knowing if you change it:
   — and fails *partway*, silently truncating your book. Typst handles it, and installs
   as a single binary instead of a multi-gigabyte TeX distribution.
 
-`index.md` becomes the title page rather than a chapter, so prose there won't appear in
-the PDF.
+The export also lists its pages explicitly under `articles:`. Without that, it sweeps in
+**every** built page — including notebooks, which reprint their entire source code and a
+duplicate of the figure. The cost is that a new chapter must be added in two places:
+`toc` (for the website) and `articles` (for the PDF).
 
 **Locally:** `myst build --typst`, which needs the Typst CLI
 (`conda install -c conda-forge typst`, or see [typst.app](https://typst.app)). You do not

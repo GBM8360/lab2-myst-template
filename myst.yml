@@ -53,6 +53,13 @@ project:
     - format: typst
       template: plain_typst_book
       output: exports/my-myst-book.pdf
+      # List the pages that belong in the PDF. Without this, the export sweeps in
+      # EVERY built page -- including notebooks, which reprint their whole source and
+      # a duplicate of the figure. Add new chapters here as well as in `toc`.
+      articles:
+        - file: index.md
+        - file: 01-getting-started.md
+        - file: 02-interactive-figures.md
 
   toc:
     - file: index.md
@@ -60,9 +67,11 @@ project:
     - file: 02-interactive-figures.md
     # Notebooks must appear in the toc for MyST to build (and execute) them --
     # otherwise `:::{figure} #label` has nothing to embed and silently renders empty.
-    - title: Notebooks
-      children:
-        - file: notebooks/figure-demo.ipynb
+    # `hidden: true` keeps it built and referenceable without publishing it as a
+    # chapter of its own, so the reader gets the figure in context rather than a
+    # second copy next to a page of source code.
+    - file: notebooks/figure-demo.ipynb
+      hidden: true
 
 site:
   template: book-theme

@@ -1,0 +1,304 @@
+My MyST Book
+An interactive book built with MyST
+
+Your Name
+
+Contents
+1. My MyST Book . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠1
+1.1 About this book . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠1
+1.2 Why interactive? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠1
+1.3 What’s here . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠1
+2. Getting started . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠3
+2.1 Publish first, edit second . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠3
+2.2 Working locally . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠3
+2.3 What the repository contains . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠3
+2.4 What the GitHub Action does . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠4
+2.5 When the build fails . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠4
+2.6 Exporting to PDF . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠4
+3. Interactive figures . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠7
+3.1 The pattern . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠7
+3.2 How it actually works . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠7
+3.3 Making your own . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠7
+3.4 Cross-references and citations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠8
+3.5 An alternative: code directly in Markdown . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠8
+References . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠9
+
+1. My MyST Book
+Start here
+This is a template. Replace this page, and the chapters listed in the sidebar, with your
+own content.
+Your first job is simply to get it published: use this template, enable GitHub Pages once,
+and let the Action build your site. Then start writing.
+
+1.1 About this book
+TODO: replace this with a paragraph about what your book covers.
+Built with MyST Markdown: Markdown for the prose, Jupyter notebooks for the
+computation, one myst.yml for the configuration, and a GitHub Action that rebuilds and
+republishes on every push.
+
+1.2 Why interactive?
+A static figure is one parameter choice out of infinitely many, frozen at publication. The
+author explored a whole parameter space; the reader gets one frame of it.
+An interactive figure hands that space back. It costs almost nothing to add, and it often
+explains in three seconds what a paragraph of caption cannot.
+
+1.3 What’s here
+• Getting started — how to build, publish and debug this book
+• Interactive figures — the interactive figure pattern, with a worked example
+Add your own pages by creating a .md file and listing it in the toc section of myst.yml.
+
+2. Getting started
+2.1 Publish first, edit second
+1. Use this template > name your repo lab2-<your-github-username>, set it Public,
+owner GBM8360.
+2. Turn on GitHub Pages — once.
+Your first build will fail, and that’s expected
+Pages is off by default on a new repository. A workflow can’t switch it on for you:
+creating a Pages site requires admin rights on the repo, and the token a workflow runs
+with only ever has write. So this one step is manual.
+Settings > Pages > Build and deployment > Source > GitHub Actions
+1. Re-run the build. Actions tab > click the failed run > Re-run failed jobs. This time
+the workflow installs Python and Node, runs every notebook, builds the HTML, and
+publishes it.
+2. Open https://gbm8360.github.io/lab2-<your-username>/.
+3. Edit index.md on the GitHub website, commit, and watch it redeploy — no manual
+steps from here on.
+You now have a published website. Everything after this is content.
+
+2.2 Working locally
+git clone https://github.com/GBM8360/lab2-<your-username>.git
+cd lab2-<your-username>
+conda create -n myst python=3.13 -y && conda activate myst
+pip install -r requirements.txt
+myst start
+# live preview at http://localhost:3000
+
+Use one environment for everything
+pip install -r requirements.txt installs MyST and the packages your notebooks
+import. If MyST ends up in a different environment from numpy and plotly, then myst
+build --execute starts a kernel that can’t import them — and the error will point at
+
+your notebook instead of at the environment. The CI build uses Python 3.13 too, so a
+build that works locally works there.
+myst start opens a live-reloading preview: save a file, the browser updates. This is much
+
+faster than pushing and waiting for the Action.
+When you’re happy:
+git add -A && git commit -m "Add my k-space chapter" && git push
+
+2.3 What the repository contains
+Path
+
+What it is
+
+myst.yml
+
+The whole configuration: title, authors, table of
+contents, bibliography, abbreviations
+
+index.md
+
+The landing page
+
+0*.md
+
+Content pages, listed in myst.yml’s toc
+
+notebooks/
+
+Jupyter notebooks whose outputs get embedded into
+the pages
+
+bibliography/references.bib
+
+BibTeX entries for {cite:p}
+
+.github/workflows/deploy.yml
+
+The GitHub Action that builds and publishes
+
+Path
+
+What it is
+
+requirements.txt
+
+Python packages, installed both locally and in CI
+
+2.4 What the GitHub Action does
+It’s worth reading deploy.yml once — it’s short. On every push to main, GitHub rents you a
+fresh Linux machine that:
+1. checks out your repository
+2. checks that Pages is configured (this is the step that fails until you’ve done the onetime setup above)
+3. installs Python, your requirements.txt, Node, and mystmd
+4. runs myst build --html --execute — the --execute flag runs your notebooks, so
+the published figures always match the code in the repo
+5. uploads the result and deploys it to Pages
+“It works on my machine” stops being an argument: if it builds here, it builds for everyone.
+
+2.5 When the build fails
+Go to the Actions tab, click the red run, and expand the failed step. The real error is usually
+near the bottom of the log. Common ones:
+Symptom
+
+Cause
+
+Create Pages site failed. Error:
+Resource not accessible by
+integration
+
+Pages isn’t enabled yet. Do the one-time
+setup above, then re-run
+
+Same error on the deploy step, and the
+job’s token list shows Pages: read
+
+The organization has workflow permissions
+set to read-only — an org owner must
+change Settings > Actions > General >
+Workflow permissions to Read and write
+
+A figure is missing and the page shows
+nothing where it should be
+
+The notebook isn’t listed in myst.yml’s toc.
+MyST only builds files in the toc, so :::
+{figure} #label has nothing to embed —
+and it fails silently
+
+Could not find bibtex entry for
+key ...
+
+Citation key isn’t in bibliography/
+
+Unknown target for cross reference
+
+[](#label) points at a label that doesn’t
+
+references.bib
+
+exist
+No kernel named python3
+
+Notebook metadata expects a kernel that CI
+doesn’t have — re-save from Jupyter
+
+Figures missing on the site but fine locally
+
+Notebook outputs weren’t committed and
+--execute was removed
+
+Site loads but CSS is broken
+
+BASE_URL doesn’t match the repository
+
+name
+
+2.6 Exporting to PDF
+myst.yml declares a PDF export, so the same source produces a website and a PDF.
+
+In CI: a separate pdf job builds it on every push and attaches it to the run. Go to the
+Actions tab > click a run > scroll to Artifacts > download book-pdf. That job installs
+LaTeX, so it takes a few minutes longer than the website; it is marked non-blocking, so if the
+PDF fails your site still publishes.
+The export uses Typst with the plain_typst_book template. Two things about that are
+worth knowing if you change it:
+
+• The template must be a book template. MyST’s default is an article template, which
+renders only one document — you get a title page and a single chapter, with no
+warning that the rest of your book was dropped.
+• Typst, not LaTeX. MyST can render PDFs through either. LaTeX chokes on content
+that is perfectly valid MyST — admonitions nested inside numbered lists, some Unicode
+— and fails partway, silently truncating your book. Typst handles it, and installs as a
+single binary instead of a multi-gigabyte TeX distribution.
+index.md becomes the title page rather than a chapter, so prose there won’t appear in the
+
+PDF.
+Locally: myst build --typst, which needs the Typst CLI (conda install -c condaforge typst, or see typst.app). You do not need it for myst start or for the website.
+How interactive figures reach the PDF
+A Plotly slider is JavaScript, so print can’t run it. The template handles this by having
+each figure emit two representations at once:
+pio.renderers.default = "plotly_mimetype+png"
+
+The website uses the interactive one; the PDF uses a static PNG snapshot. The snapshot
+shows whichever frame is visible by default, so pick that default to be the frame worth
+printing.
+Without the +png half, MyST warns Figure with no non-caption content and the
+PDF gets a caption with nothing above it. This needs kaleido installed — it’s in
+requirements.txt.
+
+3. Interactive figures
+3.1 The pattern
+An interactive figure lives in two places, and that separation is the point:
+Where
+
+What it holds
+
+notebooks/figure-demo.ipynb
+
+the computation — a cell tagged `#
+
+this page
+
+the narrative — :::{figure} #figDemo with a caption
+and a label
+
+The caption, the number and the cross-reference belong to the prose, not the notebook. So
+the figure renumbers itself when you insert another one above it, and you can refer to it
+from anywhere as Figure 1.
+Here is the figure, embedded from the notebook:
+
+Figure 3.1: A sine wave whose frequency is set by the slider. This is Plotly’s standard slider
+example — replace it with something of your own.
+
+3.2 How it actually works
+Drag the slider. Notice how fast it responds: there is no kernel behind this page. The
+notebook ran once, in GitHub Actions, when the site was built. Every frame you can reach
+was computed then and shipped inside the HTML. The slider is plain JavaScript choosing
+between them.
+That is why this is free to host, can’t go down, and will still work years from now.
+Your slider is not computing. It’s choosing.
+Which gives you the one real constraint: you must precompute every frame the reader
+can reach. The sweep is part of the design. A slider can’t answer a question you didn’t
+anticipate.
+
+3.3 Making your own
+Two practical notes:
+
+Keep the page light. Every frame ships to the reader. A dozen slider positions of a 128×88
+image is fine; two hundred at full precision is not. Rounding display values (np.round(z,
+3), or casting an image to uint8) roughly halves the page size and costs nothing visually.
+Emit a static fallback. Set pio.renderers.default = "plotly_mimetype+png" once in
+the notebook and every figure ships both an interactive version and a PNG. The website
+uses the first, the PDF the second. The snapshot captures whichever frame is visible by
+default — so make that default the frame you would have chosen if you only got one.
+Window your colours consistently. If each frame auto-scales its own brightness, the
+artifact you’re trying to show gets normalised away as the reader drags. Fix the scale once,
+from a reference frame, and apply it to all of them.
+
+3.4 Cross-references and citations
+Cross-reference anything with a label: Figure 1, or an equation like (1).
+𝑆(𝑘𝑥 , 𝑘𝑦 ) = ∬ 𝜌(𝑥, 𝑦) 𝑒−𝑖2𝜋(𝑘𝑥 𝑥+𝑘𝑦 𝑦) 𝑑𝑥 𝑑𝑦
+
+(3.1)
+
+Cite with {cite:p} and a key from bibliography/references.bib, like this (Nishimura,
+2010) or this (Larson, 2023). The bibliography page builds itself.
+
+3.5 An alternative: code directly in Markdown
+You don’t have to use .ipynb. MyST can execute a code-cell written straight into a
+Markdown file, which means one file per chapter and much cleaner git diffs:
+```{code-cell} python
+:label: myFigure
+import plotly.graph_objects as go
+...
+```
+
+Either approach works. Notebooks match how the mOOC is built today; code-cell is tidier
+to review. Pick one and be consistent.
+
+References
+Larson, P. E. Z. (2023). Spatial Encoding, Field-of-View and Resolution. In MRI Educational Resources.
+Nishimura, D. G. (2010). Principles of Magnetic Resonance Imaging. Stanford University.
+
+
