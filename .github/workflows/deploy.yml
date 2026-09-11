@@ -123,6 +123,21 @@ jobs:
       - name: Install Chrome for static figure export
         run: plotly_get_chrome -y
 
+      # Prove static export works on the real figure before building. If this fails
+      # the PDF silently loses its figures, which is hard to notice.
+      - name: Verify static image export
+        run: |
+          python - <<'EOF'
+          import plotly.io as pio, plotly.graph_objects as go, numpy as np, kaleido, plotly
+          print("plotly", plotly.__version__, "| kaleido", kaleido.__version__)
+          x = np.arange(0, 10, 0.01)
+          fig = go.Figure([go.Scatter(x=x, y=np.sin(f*x), visible=(i==0))
+                           for i, f in enumerate(np.arange(0, 5, 0.1))])
+          png = pio.to_image(fig, format="png")
+          print(f"PNG produced: {len(png)} bytes")
+          assert len(png) > 1000, "PNG suspiciously small"
+          EOF
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20.x
