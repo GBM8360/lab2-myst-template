@@ -85,3 +85,59 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  # ---------------------------------------------------------------------------
+  # PDF export. Runs alongside the website build, never blocks it.
+  #
+  # `myst.yml` declares `exports: [{format: pdf}]`, and MyST renders that through
+  # LaTeX -- so this job installs a TeX distribution, which is why it is kept
+  # separate: it adds a couple of minutes, and the site should publish whether or
+  # not the PDF succeeds. `continue-on-error` means a broken PDF shows as a
+  # warning rather than failing your whole run.
+  #
+  # NOTE: interactive figures cannot appear in a PDF. A Plotly slider is
+  # JavaScript; print has no equivalent. MyST warns "Figure with no non-caption
+  # content" and leaves the caption. If a figure matters on paper, add a static
+  # version alongside the interactive one.
+  # ---------------------------------------------------------------------------
+  pdf:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Register the Jupyter kernel
+        run: python -m ipykernel install --user --name=python3
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+
+      - name: Install MyST Markdown
+        run: npm install -g mystmd
+
+      - name: Install LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            latexmk texlive-latex-recommended texlive-latex-extra \
+            texlive-fonts-recommended texlive-xetex
+
+      - name: Build PDF
+        run: myst build --pdf --execute
+
+      - name: Upload PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: book-pdf
+          path: exports/*.pdf
+          if-no-files-found: warn

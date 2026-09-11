@@ -55,6 +55,14 @@ bibliography/references.bib  BibTeX entries
 requirements.txt             Python packages, used locally and in CI
 ```
 
+## PDF
+
+A separate `pdf` job builds a PDF on every push. Actions tab → a run → **Artifacts** →
+`book-pdf`. It installs LaTeX so it is slower than the site build, and it is
+non-blocking: a PDF failure never stops your website deploying.
+
+Interactive figures cannot render in a PDF — see `01-getting-started.md`.
+
 ## Things to change first
 
 - `myst.yml`: `title`, `authors`, `subtitle`

@@ -99,7 +99,22 @@ error is usually near the bottom of the log. Common ones:
 | Figures missing on the site but fine locally | Notebook outputs weren't committed **and** `--execute` was removed |
 | Site loads but CSS is broken | `BASE_URL` doesn't match the repository name |
 
-## Exporting
+## Exporting to PDF
 
-`myst.yml` declares a PDF export, so `myst build --pdf` gives you a PDF of the same
-source. One set of files, several outputs.
+`myst.yml` declares a PDF export, so the same source produces a website *and* a PDF.
+
+**In CI:** a separate `pdf` job builds it on every push and attaches it to the run. Go to
+the **Actions** tab → click a run → scroll to **Artifacts** → download `book-pdf`. That
+job installs LaTeX, so it takes a few minutes longer than the website; it is marked
+non-blocking, so if the PDF fails your site still publishes.
+
+**Locally:** `myst build --pdf`, which needs a LaTeX distribution installed
+([get one here](https://www.latex-project.org/get/)). You do not need it for `myst start`
+or for the website.
+
+:::{note} Interactive figures don't survive a PDF
+A Plotly slider is JavaScript, and paper has no equivalent. MyST warns
+`Figure with no non-caption content` and keeps the caption. If a figure has to work in
+print, put a static version next to the interactive one — export one representative
+frame with matplotlib and show whichever suits the format.
+:::

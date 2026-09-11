@@ -44,6 +44,7 @@ project:
   # One source, several outputs.
   exports:
     - format: pdf
+      output: exports/my-myst-book.pdf
 
   toc:
     - file: index.md
