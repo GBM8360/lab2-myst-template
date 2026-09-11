@@ -108,6 +108,12 @@ the **Actions** tab → click a run → scroll to **Artifacts** → download `bo
 job installs LaTeX, so it takes a few minutes longer than the website; it is marked
 non-blocking, so if the PDF fails your site still publishes.
 
+The export uses the **`plain_latex_book`** template. This matters: MyST's default is
+`plain_latex`, an *article* template that renders only one document — you get a title
+page and a single chapter, silently. `myst.yml` sets the book template so every page in
+the `toc` is included, with a table of contents. Note that `index.md` becomes the title
+page rather than a chapter, so prose there won't appear in the PDF.
+
 **Locally:** `myst build --pdf`, which needs a LaTeX distribution installed
 ([get one here](https://www.latex-project.org/get/)). You do not need it for `myst start`
 or for the website.

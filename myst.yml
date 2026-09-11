@@ -43,7 +43,15 @@ project:
 
   # One source, several outputs.
   exports:
+    # `template` matters here. The default is `plain_latex`, an ARTICLE template,
+    # which renders only ONE document -- you get a title page and a single chapter
+    # with no warning. `plain_latex_book` is a BOOK template: it lays out every
+    # page in the toc, with a table of contents.
+    #
+    # Note that index.md becomes the title page rather than a chapter, so any prose
+    # on it will not appear in the PDF. Put content you want in print on its own page.
     - format: pdf
+      template: plain_latex_book
       output: exports/my-myst-book.pdf
 
   toc:
