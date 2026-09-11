@@ -1,0 +1,76 @@
+name: MyST GitHub Pages Deploy
+on:
+  push:
+    branches:
+      - main
+env:
+  # Determines where the website is served from, including CSS & JS assets.
+  # Resolves to your repository name automatically -- you should not need to edit this.
+  BASE_URL: /${{ github.event.repository.name }}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # `enablement: true` switches GitHub Pages on for this repo and sets the
+      # source to GitHub Actions. Without it you would have to do that by hand in
+      # Settings -> Pages before the first deploy could succeed.
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install system dependencies for Jupyter
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Register the Jupyter kernel
+        run: |
+          python -m ipykernel install --user --name=python3
+          jupyter kernelspec list --json
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+
+      - name: Install MyST Markdown
+        run: npm install -g mystmd
+
+      # --execute runs every notebook here, in CI, so the figures on the published
+      # site always match the code in the repo. Drop the flag if it misbehaves --
+      # MyST will then use whatever outputs are saved in the .ipynb files instead.
+      - name: Build HTML
+        run: myst build --html --execute
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './_build/html'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

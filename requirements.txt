@@ -1,0 +1,15 @@
+# MyST itself -- installs without a separate Node install
+mystmd
+
+# Notebook execution
+jupyter
+ipykernel
+
+# Figures
+numpy
+plotly
+matplotlib
+
+# Add whatever your own content needs, e.g.:
+# scipy
+# nibabel

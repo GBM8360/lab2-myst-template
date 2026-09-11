@@ -1,0 +1,65 @@
+# See docs at: https://mystmd.org/guide/frontmatter
+version: 1
+project:
+  # TODO: make this yours
+  title: 'My MyST Book'
+  subtitle: An interactive book for GBM8360E
+  # TODO: add yourself. This is the same author schema a real MOOC contribution uses.
+  authors:
+    - name: Your Name
+      affiliations:
+        - Polytechnique Montréal
+  copyright: '2026'
+  license: CC-BY-4.0
+  open_access: true
+  date: 2026-09-16
+  keywords:
+    - MRI
+    - education
+
+  numbering:
+    headings: true
+
+  # Hover any of these in the rendered text to see the expansion.
+  abbreviations:
+    MRI: Magnetic resonance imaging
+    MR: Magnetic resonance
+    TR: Repetition Time
+    TE: Echo Time
+    FA: Flip Angle
+    FOV: Field of view
+    PE: Phase encode
+    RO: Readout
+    FFT: Fast Fourier Transform
+    DFT: Discrete Fourier Transform
+    SNR: Signal-to-noise ratio
+    CSF: Cerebrospinal fluid
+
+  bibliography:
+    - bibliography/references.bib
+
+  exclude:
+    - README.md
+
+  # One source, several outputs.
+  exports:
+    - format: pdf
+
+  toc:
+    - file: index.md
+    - file: 01-getting-started.md
+    - file: 02-interactive-figures.md
+    - file: 03-your-content.md
+    # Notebooks must appear in the toc for MyST to build (and execute) them --
+    # otherwise `:::{figure} #label` has nothing to embed and silently renders empty.
+    - title: Notebooks
+      children:
+        - file: notebooks/figure-demo.ipynb
+
+site:
+  template: book-theme
+  options:
+    logo_text: My MyST Book
+  actions:
+    - title: Source on GitHub
+      url: https://github.com/GBM8360
