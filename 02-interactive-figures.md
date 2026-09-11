@@ -20,7 +20,7 @@ Here is the figure, embedded from the notebook:
 :::{figure} #figDemo
 :label: demoPlot
 A sine wave whose frequency is set by the slider. This is Plotly's standard slider
-example — replace it with something from your own Lab 1 work.
+example — replace it with something of your own.
 :::
 
 ## How it actually works

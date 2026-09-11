@@ -6,10 +6,25 @@ title: Getting started
 
 1. **Use this template** → name your repo `lab2-<your-github-username>`, set it
    **Public**, owner `GBM8360`.
-2. Watch the **Actions** tab. The workflow installs Python and Node, runs every
-   notebook, builds the HTML, and publishes it.
-3. Open `https://gbm8360.github.io/lab2-<your-username>/`.
-4. Edit `index.md` on the GitHub website, commit, and watch it redeploy.
+
+2. **Turn on GitHub Pages — once.**
+
+   :::{important} Your first build will fail, and that's expected
+   Pages is off by default on a new repository. A workflow can't switch it on for you:
+   creating a Pages site requires *admin* rights on the repo, and the token a workflow
+   runs with only ever has *write*. So this one step is manual.
+
+   **Settings → Pages → Build and deployment → Source → GitHub Actions**
+   :::
+
+3. **Re-run the build.** Actions tab → click the failed run → **Re-run failed jobs**.
+   This time the workflow installs Python and Node, runs every notebook, builds the
+   HTML, and publishes it.
+
+4. Open `https://gbm8360.github.io/lab2-<your-username>/`.
+
+5. Edit `index.md` on the GitHub website, commit, and watch it redeploy — no manual
+   steps from here on.
 
 You now have a published website. Everything after this is content.
 
@@ -49,7 +64,8 @@ It's worth reading `deploy.yml` once — it's short. On every push to `main`, Gi
 rents you a fresh Linux machine that:
 
 1. checks out your repository
-2. turns on GitHub Pages (`enablement: true`) so you never touch Settings
+2. checks that Pages is configured (this is the step that fails until you've done the
+   one-time setup above)
 3. installs Python, your `requirements.txt`, Node, and `mystmd`
 4. runs `myst build --html --execute` — the `--execute` flag **runs your notebooks**,
    so the published figures always match the code in the repo
@@ -65,6 +81,9 @@ error is usually near the bottom of the log. Common ones:
 
 | Symptom | Cause |
 |---|---|
+| `Create Pages site failed. Error: Resource not accessible by integration` | Pages isn't enabled yet. Do the one-time setup above, then re-run |
+| Same error on the **deploy** step, and the job's token list shows `Pages: read` | The organization has workflow permissions set to read-only — an org owner must change *Settings → Actions → General → Workflow permissions* to **Read and write** |
+| A figure is missing and the page shows nothing where it should be | The notebook isn't listed in `myst.yml`'s `toc`. MyST only builds files in the toc, so `:::{figure} #label` has nothing to embed — and it fails **silently** |
 | `Could not find bibtex entry for key ...` | Citation key isn't in `bibliography/references.bib` |
 | `Unknown target for cross reference` | `[](#label)` points at a label that doesn't exist |
 | `No kernel named python3` | Notebook metadata expects a kernel that CI doesn't have — re-save from Jupyter |

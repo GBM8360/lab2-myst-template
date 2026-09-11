@@ -26,9 +26,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # `enablement: true` switches GitHub Pages on for this repo and sets the
-      # source to GitHub Actions. Without it you would have to do that by hand in
-      # Settings -> Pages before the first deploy could succeed.
+      # NOTE: `enablement: true` does NOT reliably turn Pages on for you. Creating a
+      # Pages site calls an API that requires *admin* rights, and the token a workflow
+      # gets only has *write* -- so on a brand-new repo this step fails with
+      # "Create Pages site failed: Resource not accessible by integration".
+      #
+      # Enable Pages once, by hand: Settings -> Pages -> Source -> GitHub Actions.
+      # After that this step is a harmless no-op and every push deploys automatically.
+      #
+      # This step also fails if the organization has workflow permissions set to
+      # read-only -- the `permissions:` block above can only narrow that default,
+      # never widen it.
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
