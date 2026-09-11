@@ -33,9 +33,18 @@ You now have a published website. Everything after this is content.
 ```bash
 git clone https://github.com/GBM8360/lab2-<your-username>.git
 cd lab2-<your-username>
+conda create -n myst python=3.13 -y && conda activate myst
 pip install -r requirements.txt
-myst start
+myst start                       # live preview at http://localhost:3000
 ```
+
+:::{warning} Use one environment for everything
+`pip install -r requirements.txt` installs MyST *and* the packages your notebooks
+import. If MyST ends up in a different environment from `numpy` and `plotly`, then
+`myst build --execute` starts a kernel that can't import them — and the error will
+point at your notebook instead of at the environment. The CI build uses Python 3.13
+too, so a build that works locally works there.
+:::
 
 `myst start` opens a live-reloading preview: save a file, the browser updates. This is
 much faster than pushing and waiting for the Action.

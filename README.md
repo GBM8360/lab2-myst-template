@@ -31,9 +31,14 @@ Then work locally:
 ```bash
 git clone https://github.com/GBM8360/lab2-<your-username>.git
 cd lab2-<your-username>
+conda create -n myst python=3.13 -y && conda activate myst
 pip install -r requirements.txt
-myst start
+myst start                       # live preview at http://localhost:3000
 ```
+
+Install everything into the **same** environment. If `myst` lives in one env and
+`numpy`/`plotly` in another, `myst build --execute` launches a kernel that can't import
+them, and the error points at your notebook rather than at the environment.
 
 `pip install mystmd` brings MyST in without a separate Node install.
 

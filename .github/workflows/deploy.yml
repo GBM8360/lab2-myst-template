@@ -45,7 +45,10 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          # Keep this matching what students use locally
+          # (conda create -n myst python=3.13) so a build that works on their
+          # machine works here too.
+          python-version: '3.13'
           cache: pip
 
       - name: Install system dependencies for Jupyter
