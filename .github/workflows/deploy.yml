@@ -128,8 +128,9 @@ jobs:
       - name: Verify static image export
         run: |
           python - <<'EOF'
-          import plotly.io as pio, plotly.graph_objects as go, numpy as np, kaleido, plotly
-          print("plotly", plotly.__version__, "| kaleido", kaleido.__version__)
+          import plotly.io as pio, plotly.graph_objects as go, numpy as np, plotly
+          from importlib.metadata import version
+          print("plotly", plotly.__version__, "| kaleido", version("kaleido"))
           x = np.arange(0, 10, 0.01)
           fig = go.Figure([go.Scatter(x=x, y=np.sin(f*x), visible=(i==0))
                            for i, f in enumerate(np.arange(0, 5, 0.1))])
