@@ -128,8 +128,11 @@ jobs:
       - name: Install LaTeX
         run: |
           sudo apt-get update
+          # `lmodern` is its own package on Debian/Ubuntu -- the book template does
+          # \usepackage{lmodern} and fails without it. texlive-xetex is needed because
+          # latexmk drives xelatex here.
           sudo apt-get install -y --no-install-recommends \
-            latexmk texlive-latex-recommended texlive-latex-extra \
+            latexmk lmodern texlive-latex-recommended texlive-latex-extra \
             texlive-fonts-recommended texlive-xetex
 
       - name: Build PDF
@@ -140,4 +143,6 @@ jobs:
         with:
           name: book-pdf
           path: exports/*.pdf
-          if-no-files-found: warn
+          # `error`, not `warn`: a missing PDF should be visible. The job is
+          # continue-on-error, so this still never blocks the website deploy.
+          if-no-files-found: error
