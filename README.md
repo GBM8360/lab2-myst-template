@@ -9,7 +9,7 @@ one published site.
 
 ## Quick start
 
-1. Click **Use this template** → name it `lab2-<your-github-username>`, set **Public**,
+1. Click **Use this template** > name it `lab2-<your-github-username>`, set **Public**,
    owner `GBM8360`.
 
 2. **The first Action run will fail. This is expected.** GitHub Pages is off by default
@@ -17,9 +17,9 @@ one published site.
    site needs *admin* rights, and the token a workflow gets only has *write*. So you do
    it once, by hand:
 
-   > **Settings → Pages → Build and deployment → Source → GitHub Actions**
+   > **Settings > Pages > Build and deployment > Source > GitHub Actions**
 
-3. Re-run the build: **Actions** tab → click the failed run → **Re-run failed jobs**.
+3. Re-run the build: **Actions** tab > click the failed run > **Re-run failed jobs**.
 
 4. When it goes green, open `https://gbm8360.github.io/lab2-<your-username>/`.
 
@@ -57,7 +57,7 @@ requirements.txt             Python packages, used locally and in CI
 
 ## PDF
 
-A separate `pdf` job builds a PDF on every push. Actions tab → a run → **Artifacts** →
+A separate `pdf` job builds a PDF on every push. Actions tab > a run > **Artifacts** >
 `book-pdf`. It installs LaTeX so it is slower than the site build, and it is
 non-blocking: a PDF failure never stops your website deploying.
 
@@ -71,14 +71,14 @@ Interactive figures cannot render in a PDF — see `01-getting-started.md`.
 
 ## If the build fails
 
-Actions tab → click the red run → expand the failed step; the real error is near the
+Actions tab > click the red run > expand the failed step; the real error is near the
 bottom. `01-getting-started.md` lists the common ones. The two you are most likely to
 hit first:
 
 | Error in the log | Fix |
 |---|---|
 | `Create Pages site failed. Error: Resource not accessible by integration` | Pages isn't enabled yet — do step 2 above, then re-run |
-| `Resource not accessible by integration` on **deploy**, with `Pages: read` in the job's token list | The organization has workflow permissions set to read-only. An org owner must set *Settings → Actions → General → Workflow permissions* to **Read and write** |
+| `Resource not accessible by integration` on **deploy**, with `Pages: read` in the job's token list | The organization has workflow permissions set to read-only. An org owner must set *Settings > Actions > General > Workflow permissions* to **Read and write** |
 
 **Fallback:** if `myst build --html --execute` misbehaves in CI, drop `--execute` from
 `.github/workflows/deploy.yml` and commit your notebooks with their outputs saved

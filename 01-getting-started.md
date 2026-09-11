@@ -4,7 +4,7 @@ title: Getting started
 
 ## Publish first, edit second
 
-1. **Use this template** → name your repo `lab2-<your-github-username>`, set it
+1. **Use this template** > name your repo `lab2-<your-github-username>`, set it
    **Public**, owner `GBM8360`.
 
 2. **Turn on GitHub Pages — once.**
@@ -14,10 +14,10 @@ title: Getting started
    creating a Pages site requires *admin* rights on the repo, and the token a workflow
    runs with only ever has *write*. So this one step is manual.
 
-   **Settings → Pages → Build and deployment → Source → GitHub Actions**
+   **Settings > Pages > Build and deployment > Source > GitHub Actions**
    :::
 
-3. **Re-run the build.** Actions tab → click the failed run → **Re-run failed jobs**.
+3. **Re-run the build.** Actions tab > click the failed run > **Re-run failed jobs**.
    This time the workflow installs Python and Node, runs every notebook, builds the
    HTML, and publishes it.
 
@@ -91,7 +91,7 @@ error is usually near the bottom of the log. Common ones:
 | Symptom | Cause |
 |---|---|
 | `Create Pages site failed. Error: Resource not accessible by integration` | Pages isn't enabled yet. Do the one-time setup above, then re-run |
-| Same error on the **deploy** step, and the job's token list shows `Pages: read` | The organization has workflow permissions set to read-only — an org owner must change *Settings → Actions → General → Workflow permissions* to **Read and write** |
+| Same error on the **deploy** step, and the job's token list shows `Pages: read` | The organization has workflow permissions set to read-only — an org owner must change *Settings > Actions > General > Workflow permissions* to **Read and write** |
 | A figure is missing and the page shows nothing where it should be | The notebook isn't listed in `myst.yml`'s `toc`. MyST only builds files in the toc, so `:::{figure} #label` has nothing to embed — and it fails **silently** |
 | `Could not find bibtex entry for key ...` | Citation key isn't in `bibliography/references.bib` |
 | `Unknown target for cross reference` | `[](#label)` points at a label that doesn't exist |
@@ -104,19 +104,27 @@ error is usually near the bottom of the log. Common ones:
 `myst.yml` declares a PDF export, so the same source produces a website *and* a PDF.
 
 **In CI:** a separate `pdf` job builds it on every push and attaches it to the run. Go to
-the **Actions** tab → click a run → scroll to **Artifacts** → download `book-pdf`. That
+the **Actions** tab > click a run > scroll to **Artifacts** > download `book-pdf`. That
 job installs LaTeX, so it takes a few minutes longer than the website; it is marked
 non-blocking, so if the PDF fails your site still publishes.
 
-The export uses the **`plain_latex_book`** template. This matters: MyST's default is
-`plain_latex`, an *article* template that renders only one document — you get a title
-page and a single chapter, silently. `myst.yml` sets the book template so every page in
-the `toc` is included, with a table of contents. Note that `index.md` becomes the title
-page rather than a chapter, so prose there won't appear in the PDF.
+The export uses **Typst** with the `plain_typst_book` template. Two things about that
+are worth knowing if you change it:
 
-**Locally:** `myst build --pdf`, which needs a LaTeX distribution installed
-([get one here](https://www.latex-project.org/get/)). You do not need it for `myst start`
-or for the website.
+- **The template must be a *book* template.** MyST's default is an *article* template,
+  which renders only one document — you get a title page and a single chapter, with no
+  warning that the rest of your book was dropped.
+- **Typst, not LaTeX.** MyST can render PDFs through either. LaTeX chokes on content
+  that is perfectly valid MyST — admonitions nested inside numbered lists, some Unicode
+  — and fails *partway*, silently truncating your book. Typst handles it, and installs
+  as a single binary instead of a multi-gigabyte TeX distribution.
+
+`index.md` becomes the title page rather than a chapter, so prose there won't appear in
+the PDF.
+
+**Locally:** `myst build --typst`, which needs the Typst CLI
+(`conda install -c conda-forge typst`, or see [typst.app](https://typst.app)). You do not
+need it for `myst start` or for the website.
 
 :::{note} Interactive figures don't survive a PDF
 A Plotly slider is JavaScript, and paper has no equivalent. MyST warns

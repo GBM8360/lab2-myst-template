@@ -89,11 +89,10 @@ jobs:
   # ---------------------------------------------------------------------------
   # PDF export. Runs alongside the website build, never blocks it.
   #
-  # `myst.yml` declares `exports: [{format: pdf}]`, and MyST renders that through
-  # LaTeX -- so this job installs a TeX distribution, which is why it is kept
-  # separate: it adds a couple of minutes, and the site should publish whether or
-  # not the PDF succeeds. `continue-on-error` means a broken PDF shows as a
-  # warning rather than failing your whole run.
+  # `myst.yml` declares a Typst export with the `plain_typst_book` template, which
+  # lays out every page in the toc with a table of contents. Kept as its own job so
+  # the site publishes whether or not the PDF succeeds; `continue-on-error` means a
+  # broken PDF shows as a warning rather than failing the whole run.
   #
   # NOTE: interactive figures cannot appear in a PDF. A Plotly slider is
   # JavaScript; print has no equivalent. MyST warns "Figure with no non-caption
@@ -125,18 +124,17 @@ jobs:
       - name: Install MyST Markdown
         run: npm install -g mystmd
 
-      - name: Install LaTeX
+      # Typst instead of LaTeX: one ~30 MB binary rather than a TeX distribution, and
+      # it survives content that breaks LaTeX (nested admonitions inside lists, Unicode).
+      - name: Install Typst
         run: |
-          sudo apt-get update
-          # `lmodern` is its own package on Debian/Ubuntu -- the book template does
-          # \usepackage{lmodern} and fails without it. texlive-xetex is needed because
-          # latexmk drives xelatex here.
-          sudo apt-get install -y --no-install-recommends \
-            latexmk lmodern texlive-latex-recommended texlive-latex-extra \
-            texlive-fonts-recommended texlive-xetex
+          curl -fsSL https://github.com/typst/typst/releases/latest/download/typst-x86_64-unknown-linux-musl.tar.xz -o /tmp/typst.tar.xz
+          mkdir -p /tmp/typst && tar -xJf /tmp/typst.tar.xz -C /tmp/typst --strip-components=1
+          sudo install -m 0755 /tmp/typst/typst /usr/local/bin/typst
+          typst --version
 
       - name: Build PDF
-        run: myst build --pdf --execute
+        run: myst build --typst --execute
 
       - name: Upload PDF
         uses: actions/upload-artifact@v4

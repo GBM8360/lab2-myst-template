@@ -50,8 +50,8 @@ project:
     #
     # Note that index.md becomes the title page rather than a chapter, so any prose
     # on it will not appear in the PDF. Put content you want in print on its own page.
-    - format: pdf
-      template: plain_latex_book
+    - format: typst
+      template: plain_typst_book
       output: exports/my-myst-book.pdf
 
   toc:
